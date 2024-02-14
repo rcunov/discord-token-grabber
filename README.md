@@ -31,4 +31,4 @@ Currently this project only runs on Windows, but hoping to add more functionalit
 Do `go build .` and `.\discord-token-grabber.exe` from a CMD or Powershell window to print out the Discord token for your installation of the Discord desktop app. 
 
 ### Sneaky way
-`go build -ldflags -H=windowsgui -o silent.exe .` will build an .exe called `silent.exe` that won't spawn any windows. It tricks the machine into thinking it's a GUI app even if it doesn't have a GUI so it hides terminal windows. Useful if someone were to have changed the logic in the `main()` function to send the token back to some C2 infra and didn't want to spook a user with temporary terminal windows.
+`go build -ldflags -H=windowsgui -o silent.exe .` will build an .exe called `silent.exe` that won't spawn any windows when a user clicks on the .exe to run it. It tricks the machine into thinking it's a GUI app even if it doesn't have a GUI so it hides terminal windows. Useful if someone were to have changed the logic in the `main()` function to send the token back to some C2 infra and didn't want to spook a user with temporary terminal windows.
