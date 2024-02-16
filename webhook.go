@@ -13,47 +13,47 @@ import (
 // they're all used to generate the webhook payload
 
 type Author struct { // This one is unused
-	Name    string `json:"name"`
-	URL     string `json:"url"`
-	IconURL string `json:"icon_url"`
+	Name	string	`json:"name"`
+	URL		string	`json:"url"`
+	IconURL	string	`json:"icon_url"`
 }
 
 type Field struct {
-	Name   string `json:"name"`
-	Value  string `json:"value"`
-	Inline bool   `json:"inline,omitempty"`
+	Name	string	`json:"name"`
+	Value	string	`json:"value"`
+	Inline	bool	`json:"inline,omitempty"`
 }
 
 type Thumbnail struct {
-	URL string `json:"url"`
+	URL	string	`json:"url"`
 }
 
 type Image struct { // This one is also unused
-	URL string `json:"url"`
+	URL	string	`json:"url"`
 }
 
 type Footer struct {
-	Text    string `json:"text"`
-	IconURL string `json:"icon_url"`
+	Text	string	`json:"text"`
+	IconURL	string	`json:"icon_url"`
 }
 
 type Embed struct {
-	Author     Author     `json:"author"`
-	Title      string     `json:"title"`
-	URL        string     `json:"url"`
-	Description string     `json:"description"`
-	Color      int        `json:"color"`
-	Fields     []Field    `json:"fields"`
-	Thumbnail  Thumbnail  `json:"thumbnail"`
-	Image      Image      `json:"image"`
-	Footer     Footer     `json:"footer"`
+	Author			Author			`json:"author"`
+	Title			string			`json:"title"`
+	URL				string			`json:"url"`
+	Description		string			`json:"description"`
+	Color			int				`json:"color"`
+	Fields			[]Field			`json:"fields"`
+	Thumbnail		Thumbnail		`json:"thumbnail"`
+	Image			Image			`json:"image"`
+	Footer			Footer			`json:"footer"`
 }
 
 type WebhookPayload struct { // This one brings together all the possible webhook components
-	Username  string  `json:"username"`
-	AvatarURL string  `json:"avatar_url"`
-	Content   string  `json:"content"`
-	Embeds    []Embed `json:"embeds"`
+	Username		string		`json:"username"`
+	AvatarURL		string		`json:"avatar_url"`
+	Content			string		`json:"content"`
+	Embeds			[]Embed		`json:"embeds"`
 }
 
 // This function sends account data to a Discord webhook.

@@ -8,30 +8,30 @@ import (
 
 // This class holds all the user data we get from the Discord API
 type DiscordAccount struct {
-	Token					string		`json:"token"`
-	ID						string		`json:"id"`
-	Username				string		`json:"username"`
-	Avatar					string		`json:"avatar"`
-	Discriminator			string		`json:"discriminator"`
-	PublicFlags				int			`json:"public_flags"`
-	PremiumType				int			`json:"premium_type"`
-	Flags					int			`json:"flags"`
-	Banner					bool		`json:"banner"`
-	AccentColor				int			`json:"accent_color"`
-	GlobalName				string		`json:"global_name"`
-	AvatarDecorationData	bool		`json:"avatar_decoration_data"`
-	BannerColor				string		`json:"banner_color"`
-	MFAEnabled				bool		`json:"mfa_enabled"`
-	Locale					string		`json:"locale"`
-	Email					string		`json:"email"`
-	Verified				bool		`json:"verified"`
-	Phone					string		`json:"phone"`
-	NSFWAllowed				bool		`json:"nsfw_allowed"`
-	PremiumUsageFlags		int			`json:"premium_usage_flags"`
-	LinkedUsers				[]string	`json:"linked_users"`
-	PurchasedFlags			int			`json:"purchased_flags"`
-	Bio						string		`json:"bio"`
-	AuthenticatorTypes		[]int		`json:"authenticator_types"`
+	Token						string			`json:"token"`
+	ID							string			`json:"id"`
+	Username					string			`json:"username"`
+	Avatar						string			`json:"avatar"`
+	Discriminator				string			`json:"discriminator"`
+	PublicFlags					int				`json:"public_flags"`
+	PremiumType					int				`json:"premium_type"`
+	Flags						int				`json:"flags"`
+	Banner						bool			`json:"banner"`
+	AccentColor					int				`json:"accent_color"`
+	GlobalName					string			`json:"global_name"`
+	AvatarDecorationData		bool			`json:"avatar_decoration_data"`
+	BannerColor					string			`json:"banner_color"`
+	MFAEnabled					bool			`json:"mfa_enabled"`
+	Locale						string			`json:"locale"`
+	Email						string			`json:"email"`
+	Verified					bool			`json:"verified"`
+	Phone						string			`json:"phone"`
+	NSFWAllowed					bool			`json:"nsfw_allowed"`
+	PremiumUsageFlags			int				`json:"premium_usage_flags"`
+	LinkedUsers					[]string		`json:"linked_users"`
+	PurchasedFlags				int				`json:"purchased_flags"`
+	Bio							string			`json:"bio"`
+	AuthenticatorTypes			[]int			`json:"authenticator_types"`
 }
 
 func getAccountData(token string) (account DiscordAccount, err error) {
