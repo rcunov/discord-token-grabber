@@ -66,6 +66,9 @@ func getAccountData(token string) (account DiscordAccount, err error) {
 	err = json.NewDecoder(response.Body).Decode(&account)
 		if err != nil {return DiscordAccount{}, err}
 
+	// Add the token value to the data from the user API
+	account.Token = token
+
 	// Return account data if no errors encountered
 	return account, nil
 }

