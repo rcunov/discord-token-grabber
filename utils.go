@@ -26,7 +26,7 @@ func nullStringEmote(input string) (output string) {
 // If so, then it returns a Discord "check mark" emote.
 // If the bool is not true, then it returns a "no" emote.
 func boolToEmote(input bool) (output string) {
-	if input == true {
+	if input {
 		return ":white_check_mark:"
 	} else {
 		return ":prohibited:"
