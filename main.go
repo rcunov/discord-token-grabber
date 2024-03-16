@@ -108,7 +108,6 @@ func getDecryptionKey(stateFilePath string) (decryptionKey []byte, err error) {
 
 	// Parse out the encrypted value of the decryption key
 	b64EncodedKey := gjson.Get(string(stateFileBytes), "os_crypt.encrypted_key")
-		if err != nil {return nil, err}
 
 	// Base64 decode the decryption key
 	encryptedKey, err := base64.StdEncoding.DecodeString(b64EncodedKey.String())
