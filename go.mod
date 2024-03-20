@@ -1,4 +1,4 @@
-module discord-token-grabber
+module github.com/rcunov/discord-token-grabber
 
 go 1.22.0
 
